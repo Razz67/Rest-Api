@@ -6,26 +6,22 @@ const app = express();
 const bodyParser = require('body-parser');
 require('dotenv/config');
 
-
 // Import Routes
 const postsRoute = require('./routes/PostsRoute');
 const productsRoute = require('./routes/ProductRoutes');
 
+// setup our view engine
+app.set('view engine', 'jsx')
+app.engine('jsx', require('express-react-views').createEngine())
 
 // Middleware
 app.use(cors());
 app.use(bodyParser.json());
 app.use(express.urlencoded({ extended: true }));
-app.use(exprss.static('public'));
+app.use(express.static('public'));
 app.use(methodOverride('_method'));
 app.use("/posts", postsRoute);
 app.use("/products", productsRoute);
-
-
-// Routes
-app.get('/', (req, res) => {
-    res.send('We are on home');
-});
 
 // Connect to DB
 mongoose.connect(process.env.MONGO_DB, { 

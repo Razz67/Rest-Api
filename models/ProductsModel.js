@@ -64,7 +64,7 @@ const productSchema = new Schema({
 				ref: "User",
 				// required: true,
 			},
-			name: {
+			userName: {
 				type: String,
 				required: true,
 			},
