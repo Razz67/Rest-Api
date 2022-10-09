@@ -1,4 +1,5 @@
 const express = require('express');
+const methodOverride = require('method-override');
 const cors = require('cors');
 const mongoose = require('mongoose');
 const app = express();
@@ -14,6 +15,9 @@ const productsRoute = require('./routes/ProductRoutes');
 // Middleware
 app.use(cors());
 app.use(bodyParser.json());
+app.use(express.urlencoded({ extended: true }));
+app.use(exprss.static('public'));
+app.use(methodOverride('_method'));
 app.use("/posts", postsRoute);
 app.use("/products", productsRoute);
 
