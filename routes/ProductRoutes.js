@@ -1,6 +1,6 @@
 const express = require("express");
 const router = express.Router();
-// const Product = require("../models/ProductsModel");
+
 
 // Bring in controllers
 const {
@@ -16,22 +16,24 @@ const {
 // Get back all the products (Index)
 router.get("/", getAllProducts);
 
-// Add New a product  (New)
-router.post("/", createProduct);
+// Show one product (new)
+router.get("/:productID", showProduct);
 
 // Delete one product  (Destroy)
 router.delete("/:productID", deleteProduct);
 
 // Update one product
-router.patch("/:productID", updateProduct);
+router.put("/:productID", updateProduct);
 
-// Get one product (Show)
-router.get("/:productID", getOneProduct);
+
+// Add New a product  (create)
+router.post("/", createProduct);
 
 // Edit one product (Edit)
 router.get("/:productID/edit", editProduct);
 
-// Show one product (Show)
-router.get("/:productID", showProduct);
+
+// Get one product (Show)
+router.get("/:productID", getOneProduct);
 
 module.exports = router;

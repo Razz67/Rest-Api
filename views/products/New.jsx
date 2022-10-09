@@ -3,6 +3,16 @@ const React = require("react");
 
 class New extends React.Component {
 	render() {
+		const products =
+		{ 
+			_id, 
+			title, 
+			description, 
+			image, 
+			instock, 
+			quantity
+		} = this.props.products;
+
 		return (
 			<DefaultLayout className="wrapper" title="New Page">
             <div>
@@ -25,11 +35,11 @@ class New extends React.Component {
 					<input type="text" name="description" placeholder="description" />
 					<br />
 					<br />
-					Quantity:{" "}
+					Quantity:{" "} {quantity}
 					<input type="number" name="quantity" placeholder="quantity" />
 					<br />
 					<br />
-					In stock: {this.props.instock}
+					In stock: {products.instock}
 					<br />
 					<br />
 					Price: <input type="number" name="price" placeholder="price" />
@@ -38,7 +48,6 @@ class New extends React.Component {
 					<a className="nav" href={`/new/`}>
 						Add A Product
 					</a>
-					{/* <button type="submit" name="" value="Create Product">Create Product</button> */}
 				</form>
                 </div>
 			 </DefaultLayout>

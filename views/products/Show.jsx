@@ -1,14 +1,13 @@
 const React = require("react");
-// const DefaultLayout = require("../layouts/DefaultLayout");
+const DefaultLayout = require("../layouts/DefaultLayout");
 
 // class component
 class Show extends React.Component {
 	render() {
-		const { _id, title, description, category, price, image, instock } =
-			this.props.products;
+		const { _id, description, category, price, image, instock } = this.props;
 
 		return (
-			// <DefaultLayout title="Show Page" productGroup="products">
+			<DefaultLayout title="Show Page" productGroup="products">
 				<div className="wrapper">
 					<nav>
 						<a href={"/products"}>Back to Products</a>
@@ -17,7 +16,7 @@ class Show extends React.Component {
 					<h3>{category}</h3>
 					<img src={image} />
 					<p>{`Product Description: ${description}`}</p>
-					<p>{`Product Price: $${price.toFixed(2)}`}</p>
+					<p>{`Product Price: $${price}`}</p>
 					<p>{instock ? "It is in stock!" : "It is NOT in stock!"}</p>
 
 					<form action={`/products/${_id}?_method=DELETE`} method="POST">
@@ -25,11 +24,11 @@ class Show extends React.Component {
 						<br />
 						<br />
 						<a className="btn btn-primary" href={`/products/${_id}/edit`}>
-							Back
+							Back to Edit
 						</a>
 					</form>
 				</div>
-			// </DefaultLayout>
+			</DefaultLayout>
 		);
 	}
 }

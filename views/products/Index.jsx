@@ -21,7 +21,7 @@ class Index extends React.Component {
 				</ul>
 
 				<nav>
-					<a href="/products/new">Create a new a product</a>
+					<a href="products/new">Create a new a product</a>
 				</nav>
                 </div>
 			</DefaultLayout>

@@ -1,12 +1,12 @@
 const React = require("react");
-// const DefaultLayout = require("../layouts/DefaultLayout");
+const DefaultLayout = require("../layouts/DefaultLayout");
 
 class Edit extends React.Component {
 	render() {
 		let { product } = this.props;
 
 		return (
-			<div title="edit a product" productGroup="shoes">
+			<DefaultLayout title="edit a product" productGroup="shoes">
 				<h1>Edit Page</h1>
 				<form action={`/products/${product._id}?_method=PUT`} method="POST">
 					Name: <input type="text" name="name" defaultValue={product.name} />
@@ -64,7 +64,7 @@ class Edit extends React.Component {
                     <br />
                     <input type="submit" value="Edit Product" />
                 </form>
-            </div>
+            </DefaultLayout>
         );
     }
 }
