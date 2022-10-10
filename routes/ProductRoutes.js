@@ -1,39 +1,35 @@
 const express = require("express");
 const router = express.Router();
 
-
-// Bring in controllers
 const {
-	getAllProducts,
-	createProduct,
-	deleteProduct,
-	updateProduct,
-	getOneProduct,
-	editProduct,
-	showProduct,
+	findAllProducts,
+	showNewView,
+	deleteOneProduct,
+	updateOneProduct,
+	createNewProduct,
+	showEditView,
+	showOneProduct,
 } = require("../controller/ProductController");
 
-// Get back all the products (Index)
-router.get("/", getAllProducts);
+// Setup "index" routes
+router.get("/", findAllProducts);
 
-// Show one product (new)
-router.get("/:productID", showProduct);
+// Setup "new" route
+router.get("/new", showNewView);
 
-// Delete one product  (Destroy)
-router.delete("/:productID", deleteProduct);
+// Setup "destroy" route
+router.delete("/:id", deleteOneProduct);
 
-// Update one product
-router.put("/:productID", updateProduct);
+// Setup "update" route
+router.put("/:id", updateOneProduct);
 
+// Setup "create" route
+router.post("/", createNewProduct);
 
-// Add New a product  (create)
-router.post("/", createProduct);
+// Setup "edit" route
+router.get("/:id/edit", showEditView);
 
-// Edit one product (Edit)
-router.get("/:productID/edit", editProduct);
-
-
-// Get one product (Show)
-router.get("/:productID", getOneProduct);
+// Setup "show" route
+router.get("/:id", showOneProduct);
 
 module.exports = router;

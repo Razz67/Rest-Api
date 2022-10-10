@@ -1,17 +1,8 @@
 const React = require("react");
-// const DefaultLayout = require("../layouts/DefaultLayout");
+const DefaultLayout = require("../layouts/DefaultLayout");
 
 class New extends React.Component {
 	render() {
-		const products =
-		{ 
-			_id, 
-			title, 
-			description, 
-			image, 
-			instock, 
-			quantity
-		} = this.props.products;
 
 		return (
 			<DefaultLayout className="wrapper" title="New Page">
@@ -22,27 +13,58 @@ class New extends React.Component {
 				<h1>Create New Product</h1>
 
 				<form action="/products" method="POST">
-					<img src="/images/shoe2.jpg" />
+
+				Name: <input type="text" name="name" placeholder="name" />
 					<br />
 					<br />
-					Image: <input type="text" name="image" placeholder="new image url" />
-					<br />
-					<br />
-					Title: <input type="text" name="title" placeholder="title" />
-					<br />
-					<br />
+
 					Description:{" "}
 					<input type="text" name="description" placeholder="description" />
 					<br />
 					<br />
-					Quantity:{" "} {quantity}
-					<input type="number" name="quantity" placeholder="quantity" />
-					<br />
-					<br />
-					In stock: {products.instock}
-					<br />
-					<br />
+
 					Price: <input type="number" name="price" placeholder="price" />
+					<br />
+					<br />
+					Discount: <input type="number" name="discount" placeholder="discount" />
+					<br />
+					<br />
+					color: <input type="text" name="color" placeholder="color" />
+					<br />
+					<br />
+					Size: <input type="text" name="size" placeholder="size" />
+					<br />
+					<br />
+
+					Rating: <input type="number" name="rating" placeholder="rating" />
+					<br />
+					<br />
+
+					Image: <input type="text" name="image" placeholder="new image url" />
+					<br />
+					<br />
+					
+					Category: <input type="text" name="category" placeholder="category" />
+					<br />
+					<br />
+
+					Stock: <input type="number" name="stock" placeholder="stock" /> 
+					<br />
+					<br />
+
+					Number Of Reviews: <input type="number" name="numberOfReviews" placeholder="number Of Reviews" />
+					<br />
+					<br />
+
+					Reviews: <input type="text" name="reviews" placeholder="reviews" />
+					<br />
+					<br />
+
+					User: <input type="text" name="user" placeholder="user" />
+					<br />
+					<br />
+
+					Date created: <input type="text" name="dateCreated" placeholder="Date Created" />
 					<br />
 					<br />
 					<a className="nav" href={`/new/`}>

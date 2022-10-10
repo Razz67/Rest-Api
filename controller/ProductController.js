@@ -1,19 +1,25 @@
-const Product = require("../models/productsModel");
+const Product = require("../models/ProductsModel");
 
-// Route GET/products (index)
-const getAllProducts = (req, res) => {
+
+// ROUTE    GET /products     (index)
+const findAllProducts = (req, res) => {
 	Product.find({}, (err, foundProducts) => {
 		if (err) {
 			res.status(400).json(err);
 		} else {
-			res.status(200).render( "products/index", { products: foundProducts });
+			res.status(200).render("products/Index", { products: foundProducts });
 		}
 	});
 };
 
-// Route GET /products/new   (new)
-const createProduct = (req, res) => {
-	Product.create(req.body, (err, createdProduct) => {
+// ROUTE    Get /products/new    (new)
+const showNewView = (req, res) => {
+	res.render("products/New");
+};
+
+// ROUTE    DELETE /products/:id    (destroy)
+const deleteOneProduct = (req, res) => {
+	Product.findByIdAndDelete(req.params.id, (err, deleteProduct) => {
 		if (err) {
 			res.status(400).json(err);
 		} else {
@@ -22,70 +28,66 @@ const createProduct = (req, res) => {
 	});
 };
 
-// Delete Route
-const deleteProduct = (req, res) => {
-    Product.findByIdAndDelete(req.params.id, (err, deletedProduct) => {
-        if (err) {
-            res.status(400).json(err);
-        } else {
-            res.status(200).redirect("/products");
-        }
-    });
-};
-
-// Update route
-const updateProduct = (req, res) => {
-    Product.findByIdAndUpdate(req.params.id, req.body, { new: true }, (err, updatedProduct) => {
-        if (err) {
-            res.status(400).json(err);
-        } else {
-            res.status(200).redirect(`/products/${updatedProduct._id}`);
-        }
-    });
-};
+// ROUTE    Put /products/:id    (update)
+const updateOneProduct = async (req, res) => {
+	const product = await Product.findById(req.params.id);
+		if (!product) {
+			return res.status(500).json({
+				success: false,
+				message: "Product not found",
+			})
+		} 
+		product = await Product.findByIdAndUpdate(req.params.id, req.body, {
+				new: true,
+				runValidators: true,
+				useUnified: false,
+		})
+	};
 
 
-// Route    (create)
-const getOneProduct = (req, res) => {
-    Product.findById(req.params.id, (err, createdProduct) => {
-        if (err) {
-            res.status(400).json(err);
-        } else {
-            res.status(200).redirect("/products");
-        }
-    });
+// ROUTE    POST /products    (create)
+const createNewProduct = (req, res) => {
+	
+	Product.create(req.body, (err, createdproducts) => {
+		if (err) {
+			res.status(400).json(err);
+		} else {
+			res.status(200).redirect("/products");
+		}
+	});
 };
 
 
-// Edit Route
-const editProduct = (req, res) => {
-    Product.findById(req.params.id, (err, foundProduct) => {
-        if (err) {
-            res.status(400).json(err);
-        } else {
-            res.status(200).render("products/edit", { product: foundProduct });
-        }
-    });
+// ROUTE      GET /products/:id/edit     (edit)
+const showEditView = (req, res) => {
+	Product.findById(req.params.id, (err, foundProduct) => {
+		if (err) {
+			res.status(400).json(err);
+		} else {
+			res.status(200).render("products/Edit", { log: foundProduct });
+		}
+	});
 };
 
-// Show Route
-const showProduct = (req, res) => {
-    Product.findById(req.params.id, (err, foundProduct) => {
-        if (err) {
-            res.status(400).json(err);
-        } else {
-            res.status(200).render("products/show", { product: foundProduct });
-        }
-    });
+// ROUTE    Get /products/:id    (show)
+const showOneProduct = (req, res) => {
+	Product.findById(req.params.id, (err, foundProduct) => {
+		if (err) {
+			res.status(400).json(err);
+		} else {
+			res.status(200).render("products/Show", { log: foundProduct });
+		}
+	});
 };
+
 
 
 module.exports = {
-	getAllProducts,
-	createProduct,
-	deleteProduct,
-	updateProduct,
-	getOneProduct,
-    editProduct,
-    showProduct
+	findAllProducts,
+	showNewView,
+	createNewProduct,
+	showOneProduct,
+	showEditView,
+	updateOneProduct,
+	deleteOneProduct,
 };

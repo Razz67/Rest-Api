@@ -18,8 +18,8 @@ const productSchema = new Schema({
 		required: [true, "Please add a price for your product"],
 		maxLength: [8, "Price can not exceed than 8 characters"],
 	},
-	offerPrice: {
-		type: String,
+	discount: {
+		type: Number,
 		maxLength: [4, "Discount price can not exceed than 4 characters"],
 	},
 	color: {
@@ -48,7 +48,7 @@ const productSchema = new Schema({
 		type: String,
 		required: [true, "Please add a category of your product"],
 	},
-	Stock: {
+	stock: {
 		type: Number,
 		required: [true, "Please add some stoke for your product"],
 		maxLength: [3, "Stock can not exceed than 3 characters"],
